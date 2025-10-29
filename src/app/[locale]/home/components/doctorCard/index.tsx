@@ -4,29 +4,27 @@ type Props = {
   doctor: DoctorsData;
 };
 
-// import { Avatar, Card, Text } from '@mantine/core';
 import { ChevronLeft, ClipboardClock, CreditCard, MapPin, MessageSquare, Star } from 'lucide-react';
-import { getI18n, getScopedI18n } from '@/locale/server';
-import { useI18n } from '@/locale/client';
 import { DoctorsData } from '@/http/types/DoctorService.types';
 
+
 export default async function DoctorCard({ doctor }: Props) {
-  // const t = await getScopedI18n(locale);
 
   return (
     <div key={doctor.id}>
       <div className={classes.card}>
         <div className="flex flex-col w-full">
           <div className="flex w-full align-items-center gap-2 justify-between">
-            <div className="flex gap-2">
-              {/*<Avatar src={doctor.profile_image} radius="xl" size={70} />*/}
-              <div className="flex flex-col">
+            <div className="flex gap-2 items-center">
+              <img className="size-20 shadow-xl rounded-full" src={`${process.env["BASE_URL"]}${doctor.profile_image}`}/>
+                {/*/*<Avatar src={`https://skenass.com/${doctor.profile_image}`} radius="xl" size={70} />*!/*/}
+              <div className="flex flex-col ">
                 <text>{doctor.full_name}</text>
                 <text>{doctor.profession_name}</text>
               </div>
             </div>
             <div className="flex mt-2 flex-col items-center">
-              <Star color="green" fill={'green'} />
+            <Star color="green" fill={'green'} />
               {doctor.average_rating}
             </div>
           </div>
@@ -48,10 +46,10 @@ export default async function DoctorCard({ doctor }: Props) {
             <div className="flex mt-2 justify-between w-full">
               <div className="flex gap-2 items-center">
                 <MapPin size={15} />
-                <text className="text-sm">{doctor.address}</text>
+                <text className="text-sm max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{doctor.address}</text>
               </div>
               <div className="flex gap-2 items-center cursor-pointer">
-                <text className="text-sm text-green-900 font-bold">مشاهده ی پر.فایل</text>
+                <text className="text-sm text-cyan-800 font-bold">مشاهده ی پروفایل</text>
                 <ChevronLeft color="green" size={15} />
               </div>
             </div>

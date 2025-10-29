@@ -3,6 +3,21 @@ export type LabelValueType = {
   value: string;
 };
 
-export type EnvStoreType = {
-  BASE_URL: string;
+
+export type PaginationResponse<T, M = unknown> = {
+  data: {
+    items: T[];
+    meta: M;
+  };
+  status: number;
+};
+
+
+
+
+export type MetaRs = {
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
 };

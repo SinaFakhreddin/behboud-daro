@@ -10,8 +10,8 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variantClasses = {
   filled: 'bg-blue-600 text-white hover:bg-blue-700',
-  outline: 'border border-blue-600 text-blue-600 hover:bg-blue-50',
-  light: 'bg-blue-50 text-blue-600 hover:bg-blue-100',
+  outline: 'border border-cyan-800 text-cyan-800 hover:cursor-pointer',
+  light: 'bg-blue-50 text-green-600 hover:bg-blue-100',
 };
 
 const sizeClasses = {
@@ -20,7 +20,6 @@ const sizeClasses = {
   lg: 'px-6 py-3 text-lg',
 };
 
-// Compound Component
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     { leftSection, rightSection, variant = 'filled', size = 'md', className, children, ...props },

@@ -1,7 +1,12 @@
+import {PaginationResponse} from "@/types/generalTypes";
+
 export type GetAllDoctorsRq = {
-  page: number;
-  professional_ids: string[];
-  province_ids: string[];
+  page?: number;
+  gender?:GenderType;
+  province_ids?: Array<string>;
+  profession_ids?: Array<string>
+  limit?: number;
+  q?:string
 };
 
 export type ProfessionalsDataType = {
@@ -24,7 +29,10 @@ export type ProvinceData = {
   deleted_at: string | null;
 };
 
-export type GenderType = 'male' | 'female';
+export enum GenderType {
+  MALE="male",
+  FEMALE="female"
+}
 export type DoctorsData = {
   id: number;
   profile_image: string;
@@ -61,17 +69,4 @@ export type LinkRs = {
   active: boolean;
 };
 
-export type MetaRs = {
-  current_page: number;
-  last_page: number;
-  per_page: number;
-  total: number;
-};
 
-export type GetAllDoctorsRs = {
-  data: {
-    items: DoctorsData[];
-    meta: MetaRs;
-  };
-  status: number;
-};
