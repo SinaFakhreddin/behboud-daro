@@ -1,0 +1,14 @@
+.scrollLeft::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+}
+
+.scrollLeft::-webkit-scrollbar-thumb {
+    background-color: green;
+}
+
+.scrollLeft {
+    scrollbar-width: thin;
+    scrollbar-color: green transparent;
+    direction: rtl;
+}
