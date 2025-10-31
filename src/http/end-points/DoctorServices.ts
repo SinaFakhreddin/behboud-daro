@@ -1,14 +1,13 @@
 import { httpService } from '@/http/httpServices';
-import {DoctorsData, GetAllDoctorsRq} from '@/http/types/DoctorService.types';
+import {createDoctorRq, DoctorsData, GetAllDoctorsRq} from '@/http/types/DoctorService.types';
 import {MetaRs, PaginationResponse} from "@/types/generalTypes";
 import qs from "qs"
+import {supabase} from "@/app/lib/supaBaseClient";
 
 export const DoctorServicePath = '/api/v1';
 
 async function getAllDoctors(params?: GetAllDoctorsRq) {
-
-    console.log('>>> Request params:', qs.stringify(params, { arrayFormat: 'brackets' }));
-
+    console.log("parammms",params)
 
     return httpService.get<PaginationResponse<DoctorsData, MetaRs>>(
       `${DoctorServicePath}/contracted-doctors`,
@@ -24,7 +23,16 @@ async function getAllDoctors(params?: GetAllDoctorsRq) {
       }
   );
 }
+async function createDoctor(payload?: createDoctorRq) {
+    const { data, error } = await supabase
+        .from("doctors")
+        .insert([payload])
+        .select();
+
+    if (error) throw new Error(error.message);
+    return data;
+}
 
 export const DoctorServices = {
-  getAllDoctors,
+  getAllDoctors , createDoctor
 };

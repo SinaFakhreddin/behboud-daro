@@ -9,6 +9,14 @@ export type GetAllDoctorsRq = {
   q?:string
 };
 
+export type createDoctorRq = {
+  name: string;
+  specialty: string;
+  phone: string;
+  province: string;
+  gender: string;
+};
+
 export type ProfessionalsDataType = {
   id: number;
   name: string;
@@ -31,7 +39,8 @@ export type ProvinceData = {
 
 export enum GenderType {
   MALE="male",
-  FEMALE="female"
+  FEMALE="female",
+  NONE=""
 }
 export type DoctorsData = {
   id: number;

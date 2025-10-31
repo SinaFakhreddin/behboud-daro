@@ -2,14 +2,16 @@
 import { motion, AnimatePresence } from "framer-motion";
 import {useAgentDetector} from "@/hooks/useAgentDetecor";
 import {useCloseDrawerByOutSideClick} from "@/hooks/useCloseDrawerByOutSideClick";
+import {ScrollArea} from "@mantine/core";
 
 type Props = {
     isOpened: boolean;
     onClose: VoidFunction;
     children: React.ReactNode;
+    type?:string
 };
 
-export default function ResponsiveFilterModal({ isOpened, onClose, children }: Props) {
+export default function ResponsiveFilterModal({ isOpened, onClose, children , type }: Props) {
     const {isMobile} = useAgentDetector()
     const {drawerRef} = useCloseDrawerByOutSideClick({isMobile , onClose})
 
@@ -32,14 +34,14 @@ export default function ResponsiveFilterModal({ isOpened, onClose, children }: P
                             key="drawer"
                             ref={drawerRef}
                             className="fixed bottom-0 left-0 right-0 bg-white rounded-t-xl shadow-xl z-50 p-4"
-                            style={{ height: '35vh' }}
+                            style={{ height: `${type==="create" ? "70vh" : "50vh"}` }}
                             initial={{ y: "100%" }}
                             animate={{ y: 0 }}
                             exit={{ y: "100%" }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             onClick={(e) => e.stopPropagation()}
                         >
-                            {children}
+                                {children}
                         </motion.div>
                     ) : (
                         <motion.div

@@ -1,3 +1,4 @@
+"use client"
 import classes from './index.module.css';
 
 type Props = {
@@ -8,7 +9,9 @@ import { ChevronLeft, ClipboardClock, CreditCard, MapPin, MessageSquare, Star } 
 import { DoctorsData } from '@/http/types/DoctorService.types';
 
 
-export default async function DoctorCard({ doctor }: Props) {
+export default  function DoctorCard({ doctor }: Props) {
+
+
 
   return (
     <div key={doctor.id}>
@@ -16,7 +19,7 @@ export default async function DoctorCard({ doctor }: Props) {
         <div className="flex flex-col w-full">
           <div className="flex w-full align-items-center gap-2 justify-between">
             <div className="flex gap-2 items-center">
-              <img className="size-20 shadow-xl rounded-full" src={`${process.env["BASE_URL"]}${doctor.profile_image}`}/>
+              <img className="size-20 shadow-xl rounded-full" src={`https://skenass.com${doctor.profile_image}`}/>
                 {/*/*<Avatar src={`https://skenass.com/${doctor.profile_image}`} radius="xl" size={70} />*!/*/}
               <div className="flex flex-col ">
                 <text>{doctor.full_name}</text>
