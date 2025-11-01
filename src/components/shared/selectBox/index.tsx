@@ -4,7 +4,7 @@ import { LabelValueType } from '@/types/generalTypes';
 import { v4 as randomId } from 'uuid';
 import { ChangeEvent } from 'react';
 
-type Props = {
+export type SelectBoxProps = {
     options: LabelValueType[];
     placeholder?: string;
     value?: string;
@@ -12,11 +12,12 @@ type Props = {
     className?: string;
 };
 
-export default function SelectBox({ options, placeholder, value, onChange , className }: Props) {
+export default function SelectBox({ options, placeholder, value, onChange , className }: SelectBoxProps) {
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const newValue = e.target.value;
         if (onChange) onChange(newValue);
     };
+
 
     return (
         <div className={`relative flex justify-between `}>

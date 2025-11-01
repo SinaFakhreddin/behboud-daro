@@ -7,10 +7,12 @@ type Props = {
 
 import { ChevronLeft, ClipboardClock, CreditCard, MapPin, MessageSquare, Star } from 'lucide-react';
 import { DoctorsData } from '@/http/types/DoctorService.types';
+import {useI18n} from "../../../../../../locales/client";
 
 
 export default  function DoctorCard({ doctor }: Props) {
 
+  const t =useI18n()
 
 
   return (
@@ -20,7 +22,6 @@ export default  function DoctorCard({ doctor }: Props) {
           <div className="flex w-full align-items-center gap-2 justify-between">
             <div className="flex gap-2 items-center">
               <img className="size-20 shadow-xl rounded-full" src={`https://skenass.com${doctor.profile_image}`}/>
-                {/*/*<Avatar src={`https://skenass.com/${doctor.profile_image}`} radius="xl" size={70} />*!/*/}
               <div className="flex flex-col ">
                 <text>{doctor.full_name}</text>
                 <text>{doctor.profession_name}</text>
@@ -35,15 +36,15 @@ export default  function DoctorCard({ doctor }: Props) {
             <div className="flex mt-2 justify-between w-full">
               <div className="flex gap-2 items-center">
                 <ClipboardClock size={15} />
-                <text className="text-sm">{`${doctor.experience_years} سال تجربه`}</text>
+                <text className="text-sm">{t("doctorExperience" ,{years: doctor.experience_years})}</text>
               </div>
               <div className="flex gap-2 items-center">
                 <MessageSquare size={15} />
-                <text className="text-sm">{`${doctor.comments_count} نظر `}</text>
+                <text className="text-sm">{t("comments" , {count:doctor.comments_count})}</text>
               </div>
               <div className="flex gap-2 items-center">
                 <CreditCard size={15} />
-                <text className="text-sm">{`${doctor.withdraw_count}پرداخت با اسکناس `}</text>
+                <text className="text-sm">{t("withDrawCount" , {count:doctor.withdraw_count})}</text>
               </div>
             </div>
             <div className="flex mt-2 justify-between w-full">
@@ -52,7 +53,7 @@ export default  function DoctorCard({ doctor }: Props) {
                 <text className="text-sm max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{doctor.address}</text>
               </div>
               <div className="flex gap-2 items-center cursor-pointer">
-                <text className="text-sm text-cyan-800 font-bold">مشاهده ی پروفایل</text>
+                <text className="text-sm text-cyan-800 font-bold">{t("showProfile")}</text>
                 <ChevronLeft color="green" size={15} />
               </div>
             </div>

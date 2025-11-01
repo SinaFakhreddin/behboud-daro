@@ -7,8 +7,6 @@ import {supabase} from "@/app/lib/supaBaseClient";
 export const DoctorServicePath = '/api/v1';
 
 async function getAllDoctors(params?: GetAllDoctorsRq) {
-    console.log("parammms",params)
-
     return httpService.get<PaginationResponse<DoctorsData, MetaRs>>(
       `${DoctorServicePath}/contracted-doctors`,
       {

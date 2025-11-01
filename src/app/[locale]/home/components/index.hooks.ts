@@ -1,7 +1,7 @@
 import {useInfiniteQuery, useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import { DoctorServices } from "@/http/end-points/DoctorServices";
 import { DoctorsData, GetAllDoctorsRq } from "@/http/types/DoctorService.types";
-import { MetaRs, PaginationResponse } from "@/types/generalTypes";
+import {CustomErrorRs, MetaRs, PaginationResponse} from "@/types/generalTypes";
 // import {supabase} from "@/app/lib/supaBaseClient";
 import {notifications} from "@mantine/notifications";
 
@@ -23,7 +23,6 @@ export const useSearchApiCall = ({
         queryKey,
         initialPageParam:doctorsDataRq?.page,
         queryFn: ({ pageParam = doctorsDataRq?.page || 1 }) => {
-            console.log("paramsPage",pageParam)
             return DoctorServices.getAllDoctors({ ...doctorsDataRq, page: pageParam as number}).then(res => res.data)
         },
         getNextPageParam: (lastPage) => {
@@ -52,6 +51,7 @@ export const useSearchApiCall = ({
 };
 
 
+
 export const useCreateDoctor = () => {
     const queryClient = useQueryClient();
     const {mutateAsync:createDoctor , isPending:createDoctorPending} =useMutation({
@@ -65,15 +65,14 @@ export const useCreateDoctor = () => {
             })
             queryClient.invalidateQueries({queryKey:["get-all-doctors"]})
         },
-        onError:()=>{
+        onError:(e:CustomErrorRs)=>{
             notifications.show({
                 title:"خطا",
-                message:"خطایی رخ داد",
+                message:e.message,
                 color:"red"
             })
         },
     })
-
 
     return {createDoctor , createDoctorPending}
 };

@@ -9,6 +9,7 @@ import {MetaRs, PaginationResponse} from "@/types/generalTypes";
 import {useState} from "react";
 import {useSearchApiCall} from "@/app/[locale]/home/components/index.hooks";
 import Button from "@/components/shared/Button";
+import {useI18n} from "../../../../../../locales/client";
 
 type Props = {
     initialData?: PaginationResponse<DoctorsData, MetaRs>;
@@ -16,7 +17,8 @@ type Props = {
 
 export default function DoctorListSectionClient({initialData}: Props) {
     const [paramsRq, setParamsRq] = useState<GetAllDoctorsRq | undefined>(undefined);
-    const {doctorData, loading, allDoctorsRefetch, hasNextPage, fetchNextPage} = useSearchApiCall({
+    const t = useI18n()
+    const {doctorData, loading, hasNextPage, fetchNextPage} = useSearchApiCall({
         doctorsDataRq: paramsRq,
         initialData,
     });
@@ -27,7 +29,7 @@ export default function DoctorListSectionClient({initialData}: Props) {
     return (
         <>
             <div className="flex md:justify-between">
-                <text className="text-lg font-bold">لیست پزشکان</text>
+                <text className="text-lg font-bold">{t("doctorsList")}</text>
                 <FilterSection
                     onAdvancedFilterSubmit={(value) => setParamsRq(prevState => ({
                         ...prevState,
@@ -76,12 +78,12 @@ export default function DoctorListSectionClient({initialData}: Props) {
 
                     })
                 ) : (
-                    <p className="text-center text-gray-500">هیچ پزشکی یافت نشد</p>
+                    <p className="text-center text-gray-500">{t("noDoctorResults")}</p>
                 )}
             </div>
 
             <div className={`flex w-full ${hasNextPage ? "justify-between" : "justify-end"} mt-4`}>
-                {hasNextPage && <Button size={'sm'} onClick={() => fetchNextPage()} variant='outline'>بیشتر</Button>}
+                {hasNextPage && <Button size={'sm'} onClick={() => fetchNextPage()} variant='outline'>{t("more")}</Button>}
                 <PaginationComponent
                     total={Math.ceil((doctorData?.pages[0].data.meta.total || 0) / 10)}
                     current={doctorData?.pages[doctorData?.pages.length-1].data.meta.current_page || 1}

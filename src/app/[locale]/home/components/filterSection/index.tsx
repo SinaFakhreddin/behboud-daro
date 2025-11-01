@@ -119,7 +119,7 @@ export default function FilterSection(props:Props) {
                   isOpened={isOpenCreateModal}
                   onClose={createModalHandler.close}
               >
-                  <CreateNewDoctorForm isOpened={isOpenCreateModal}/>
+                  <CreateNewDoctorForm onSuccess={createModalHandler.close}/>
               </CustomModal>
           </ResponsiveFilterModal>
              <SelectBox

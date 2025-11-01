@@ -1,11 +1,5 @@
 import {DoctorServices} from '@/http/end-points/DoctorServices';
-import DoctorCard from "@/app/[locale]/home/components/doctorCard";
-import PaginationComponent from "@/app/[locale]/home/components/paginationComponent";
-import {Title} from "@mantine/core";
-import {DoctorsData, GenderType} from "@/http/types/DoctorService.types";
-import {MetaRs, PaginationResponse} from "@/types/generalTypes";
-import {Filter} from "lucide-react";
-import FilterSection from "@/app/[locale]/home/components/filterSection";
+import {GenderType} from "@/http/types/DoctorService.types";
 import DoctorListSectionClient from "@/app/[locale]/home/components/doctorListSectionClient";
 
 export const revalidate = 0;
@@ -16,15 +10,14 @@ async function getDoctors({
                               profession_ids,
                               page,
                               province_ids,
-    gender,q
+                              gender, q
                           }: {
     page: number;
     profession_ids?: string[];
     province_ids?: string[];
-    q?:string;
-    gender?:GenderType
+    q?: string;
+    gender?: GenderType
 }) {
-    console.log("page",page)
     try {
         const res = await DoctorServices.getAllDoctors({
             page,
@@ -36,7 +29,6 @@ async function getDoctors({
         });
         return res.data;
     } catch (e) {
-        console.error(e);
         return {
             data: {
                 meta: {
@@ -60,13 +52,11 @@ export default async function ContractedDoctorsPage({
     searchParams?: Record<string, any>;
 }) {
 
-    console.log("SearchParams",searchParams)
-
     const currentPage = Number(searchParams?.page) || 1;
-    const profession_ids_raw =
-        searchParams?.profession_ids ||
-        searchParams?.["profession_ids[]"] ||
-        [];
+    // const profession_ids_raw =
+    //     searchParams?.profession_ids ||
+    //     searchParams?.["profession_ids[]"] ||
+    //     [];
 
     // const profession_ids = Array.isArray(profession_ids_raw)
     //     ? profession_ids_raw
@@ -91,9 +81,6 @@ export default async function ContractedDoctorsPage({
         // gender:searchParams?.gender,
         // q:searchParams?.q  }
     );
-
-    console.log("data",data)
-
 
     return (
         <div className=" container p-8 bg-white rounded-md mt-10">

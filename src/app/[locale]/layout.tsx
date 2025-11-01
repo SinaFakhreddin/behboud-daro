@@ -37,7 +37,7 @@ export default async function RootLayout({
 	return (
 		<html lang={"fa"} className={vazir.variable} dir={"ltr"}>
 			<body>
-				{/*<I18nProviderClient locale={locale} fallback={<p>Loading...</p>}>*/}
+				<I18nProviderClient locale={"fa"} fallback={<p>Loading...</p>}>
 					<DirectionProvider initialDirection={"rtl"} detectDirection={true}>
 						<MantineBaseProviderClient>
 							<EnvProvider
@@ -53,7 +53,7 @@ export default async function RootLayout({
 							</EnvProvider>
 						</MantineBaseProviderClient>
 					</DirectionProvider>
-				{/*</I18nProviderClient>*/}
+				</I18nProviderClient>
 			</body>
 		</html>
 	);

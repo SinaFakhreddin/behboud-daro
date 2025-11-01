@@ -10,8 +10,8 @@ type Props = {
 };
 
 export default function PaginationComponent({ total, current ,onChange }: Props) {
-    const router = useRouter();
-    const searchParams = useSearchParams();
+    // const router = useRouter();
+    // const searchParams = useSearchParams();
 
     const handleChange = (page: number) => {
             onChange(page)
@@ -19,8 +19,6 @@ export default function PaginationComponent({ total, current ,onChange }: Props)
         // params.set("page", String(page));
         // router.push(`?${params.toString()}`);
     };
-
-    console.log("total",total)
 
     return (
         <Flex justify="center" mt={16}>
